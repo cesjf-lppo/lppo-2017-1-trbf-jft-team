@@ -15,7 +15,7 @@
         <title>Início</title>
     </head>
     <body>
-        <table border="1" width="500" align="center">
+        <table border="1" width="350" cellpadding="7" cellspacing="1" align="center">
             <thead>
                 <tr>
                     <th>Aluno</th>
@@ -25,10 +25,10 @@
             <tbody>
                 <tr>
                     <td>José Flávio de Assis Júnior</td>
-                    <td>Tiago Souza Nogueira</td>
+                    <td>02528860</td>
                 </tr>
                 <tr>
-                    <td>02528860</td>
+                    <td>Tiago Souza Nogueira</td>
                     <td>00000000</td>
                 </tr>
             </tbody>

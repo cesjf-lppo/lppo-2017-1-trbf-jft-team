@@ -4,12 +4,26 @@
 <div id="menu">
 <nav class="dropdownmenu">
     <ul>
-        <li><a href="">Link</a></li>
-        <li><a href="">Link</a>
+        <li><a href="">Usuário</a>
             <ul id="submenu">
-                <li><a href="">Sublink</a></li>
+                <li><a href="">Criar</a></li>
+                <li><a href="">Listar</a></li>
+                <li><a href="">Editar</a></li>
             </ul>
         </li>
-        <li><a href="">Link</a></li>
+        <li><a href="">Tarefa</a>
+            <ul id="submenu">
+                <li><a href="">Criar</a></li>
+                <li><a href="">Listar</a></li>
+                <li><a href="">Editar</a></li>
+            </ul>
+        </li>
+        <li><a href="">Etiqueta</a>
+            <ul id="submenu">
+                <li><a href="">Criar</a></li>
+                <li><a href="">Listar</a></li>
+                <li><a href="">Editar</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
