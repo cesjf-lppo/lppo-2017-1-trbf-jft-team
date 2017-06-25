@@ -1,0 +1,6 @@
+<%@ page pageEncoding="UTF-8" %>
+<link href="../../css/estilo.css" rel="stylesheet" type="text/css">
+
+<div id="footer">
+<div>Desenvolvido por: José Flávio; Tiago Nogueira</div>
+</div>

@@ -1,0 +1,15 @@
+<%@ page pageEncoding="UTF-8" %>
+<link href="../../css/estilo.css" rel="stylesheet" type="text/css">
+
+<div id="menu">
+<nav class="dropdownmenu">
+    <ul>
+        <li><a href="">Link</a></li>
+        <li><a href="">Link</a>
+            <ul id="submenu">
+                <li><a href="">Sublink</a></li>
+            </ul>
+        </li>
+        <li><a href="">Link</a></li>
+    </ul>
+</div>
