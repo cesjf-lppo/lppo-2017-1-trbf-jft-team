@@ -25,9 +25,10 @@
                 <th>Nome: </th>
                 <th>E-mail: </th>
             </tr>
-            <c:forEach var="variavel" items="${usuarios}">
+            <c:forEach var="usuario" items="${usuario}">
                 <tr>
-                    <td>${usuario.id}</td>
+		    
+                    <td><a href="editar.html?id=${usuario.d}"> ${usuario.id}</a></td>
                     <td>${usuario.nome}</td>
                     <td>${usuario.email}</td>
                 </tr>

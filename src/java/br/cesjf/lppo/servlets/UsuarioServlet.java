@@ -91,14 +91,16 @@ public class UsuarioServlet extends HttpServlet {
        
     }
 
-    private void doEditarGet(HttpServletRequest request, HttpServletResponse response) {
+    private void doEditarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	try {
 	    UsuarioJpaController dao = new UsuarioJpaController(ut, emf);
 	    Long id = Long.parseLong(request.getParameter("id"));
 	    Usuario usuario = dao.findUsuario(id);
 	    request.setAttribute("usuario", usuario);
-	    request.getRequestDispatcher("WEB-INF/")
+	    request.getRequestDispatcher("WEB-INF/editaUsuario.js").forward(request, response);
+	} catch (Exception e){
+	    response.sendRedirect("listar.html");
 	    
 	}
        
