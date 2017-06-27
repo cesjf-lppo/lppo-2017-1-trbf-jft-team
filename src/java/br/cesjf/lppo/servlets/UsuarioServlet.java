@@ -27,7 +27,7 @@ import javax.transaction.UserTransaction;
  *
  * @author cpd
  */
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/criar.html", "/listar.html", "/excluir.html", "/edita.html"})
+@WebServlet(name = "UsuarioServlet", urlPatterns = {"/criarUsuario.html", "/listarUsuario.html", "/excluirUsuario.html", "/editarUsuario.html"})
 public class UsuarioServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "lppo-2017-1-trbf-jft-teamPU")
@@ -40,13 +40,13 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getServletPath().contains("criar.html")){
+        if(request.getServletPath().contains("criarUsuario.html")){
             doCriarGet(request, response);
-        } else if (request.getServletPath().contains("listar.html")){
+        } else if (request.getServletPath().contains("listarUsuario.html")){
             doListarGet(request, response);
-        } else if (request.getServletPath().contains("excluir.html")){
+        } else if (request.getServletPath().contains("excluirUsuario.html")){
             doExcluirGet(request, response);
-        } else if (request.getServletPath().contains("edita.html")){
+        } else if (request.getServletPath().contains("editarUsuario.html")){
             doEditarGet(request, response);
         }
        
@@ -55,9 +55,9 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         if (request.getServletPath().contains("/editar.html")) {
+         if (request.getServletPath().contains("/editarUsuario.html")) {
             doEditarPost(request, response);
-        } if (request.getServletPath().contains("/criar.html")) {
+        } if (request.getServletPath().contains("/criarUsuario.html")) {
             doCriarPost(request, response);
         
        
@@ -68,9 +68,7 @@ public class UsuarioServlet extends HttpServlet {
       request.getRequestDispatcher("WEB-INF/novoUsuario.jsp").forward(request, response);
     }
 
-    private void doListarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	try{
+    private void doListarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 	List<Usuario> usuarios = new ArrayList<>();
 	
 	UsuarioJpaController dao = new UsuarioJpaController(ut, emf);
@@ -78,13 +76,8 @@ public class UsuarioServlet extends HttpServlet {
 	usuarios = dao.findUsuarioEntities();
 	
 	request.setAttribute("usuario", usuarios);
-	request.getRequestDispatcher("WEB-INF/listaUsuario.jsp").forward(request, response);
+	request.getRequestDispatcher("WEB-INF/listarUsuario.jsp").forward(request, response);
 	
-	
-	
-	} catch (Exception ex){
-	    request.getRequestDispatcher("WEB-INF/erro.jsp").forward(request, response);
-	}
     }
 
     private void doExcluirGet(HttpServletRequest request, HttpServletResponse response) {
@@ -98,9 +91,9 @@ public class UsuarioServlet extends HttpServlet {
 	    Long id = Long.parseLong(request.getParameter("id"));
 	    Usuario usuario = dao.findUsuario(id);
 	    request.setAttribute("usuario", usuario);
-	    request.getRequestDispatcher("WEB-INF/editaUsuario.js").forward(request, response);
+	    request.getRequestDispatcher("WEB-INF/editarUsuario.jsp").forward(request, response);
 	} catch (Exception e){
-	    response.sendRedirect("listar.html");
+	    response.sendRedirect("listarUsuario.html");
 	    
 	}
        
@@ -121,7 +114,7 @@ public class UsuarioServlet extends HttpServlet {
         
         try{
             dao.create(user);
-            response.sendRedirect("listar.html");
+            response.sendRedirect("listarUsuario.html");
          } catch (Exception ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

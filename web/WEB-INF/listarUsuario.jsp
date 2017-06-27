@@ -4,8 +4,8 @@
     Author     : Júnior
 --%>
 
+<%@page errorPage="../WEB-INF/erro.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page errorPage="erro.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +18,7 @@
     </head>
     <body>
         <center>
-        <h1>Listar Coletas</h1>
+        <h1>Listar usuários</h1>
         <table border="1">
             <tr>
                 <th>ID: </th>
@@ -28,7 +28,7 @@
             <c:forEach var="usuario" items="${usuario}">
                 <tr>
 		    
-                    <td><a href="editar.html?id=${usuario.d}"> ${usuario.id}</a></td>
+                    <td><a href="editarUsuario.html?id=${usuario.id}"> ${usuario.id}</a></td>
                     <td>${usuario.nome}</td>
                     <td>${usuario.email}</td>
                 </tr>

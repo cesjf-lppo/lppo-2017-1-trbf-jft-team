@@ -7,9 +7,9 @@
     <ul>
         <li><a href="">Usuário</a>
             <ul id="submenu">
-                <li><a href="criar.html">Criar</a></li>
-                <li><a href="listar.html">Listar</a></li>
-                <li><a href="">Editar</a></li>
+                <li><a href="criarUsuario.html">Criar</a></li>
+                <li><a href="listarUsuario.html">Listar</a></li>
+                <li><a href="editarUsuario.html">Editar</a></li>
             </ul>
         </li>
         <li><a href="">Tarefa</a>
