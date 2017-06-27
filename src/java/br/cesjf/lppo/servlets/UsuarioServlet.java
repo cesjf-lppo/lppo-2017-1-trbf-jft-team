@@ -9,6 +9,8 @@ import br.cesjf.lppo.dao.UsuarioJpaController;
 import br.cesjf.lppo.entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -25,7 +27,7 @@ import javax.transaction.UserTransaction;
  *
  * @author cpd
  */
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/criar.html", "/listar.html", "/excluir.html", "/editar.html"})
+@WebServlet(name = "UsuarioServlet", urlPatterns = {"/criar.html", "/listar.html", "/excluir.html", "/edita.html"})
 public class UsuarioServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "lppo-2017-1-trbf-jft-teamPU")
@@ -44,7 +46,7 @@ public class UsuarioServlet extends HttpServlet {
             doListarGet(request, response);
         } else if (request.getServletPath().contains("excluir.html")){
             doExcluirGet(request, response);
-        } else if (request.getServletPath().contains("editar.html")){
+        } else if (request.getServletPath().contains("edita.html")){
             doEditarGet(request, response);
         }
        
@@ -66,8 +68,23 @@ public class UsuarioServlet extends HttpServlet {
       request.getRequestDispatcher("WEB-INF/novoUsuario.jsp").forward(request, response);
     }
 
-    private void doListarGet(HttpServletRequest request, HttpServletResponse response) {
-        
+    private void doListarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	try{
+	List<Usuario> usuarios = new ArrayList<>();
+	
+	UsuarioJpaController dao = new UsuarioJpaController(ut, emf);
+	
+	usuarios = dao.findUsuarioEntities();
+	
+	request.setAttribute("usuario", usuarios);
+	request.getRequestDispatcher("WEB-INF/listaUsuario.jsp").forward(request, response);
+	
+	
+	
+	} catch (Exception ex){
+	    request.getRequestDispatcher("WEB-INF/erro.jsp").forward(request, response);
+	}
     }
 
     private void doExcluirGet(HttpServletRequest request, HttpServletResponse response) {
@@ -75,6 +92,15 @@ public class UsuarioServlet extends HttpServlet {
     }
 
     private void doEditarGet(HttpServletRequest request, HttpServletResponse response) {
+	
+	try {
+	    UsuarioJpaController dao = new UsuarioJpaController(ut, emf);
+	    Long id = Long.parseLong(request.getParameter("id"));
+	    Usuario usuario = dao.findUsuario(id);
+	    request.setAttribute("usuario", usuario);
+	    request.getRequestDispatcher("WEB-INF/")
+	    
+	}
        
     }
 

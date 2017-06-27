@@ -1,13 +1,14 @@
 <%@ page pageEncoding="UTF-8" %>
 <link href="../../css/estilo.css" rel="stylesheet" type="text/css">
 
+
 <div id="menu">
 <nav class="dropdownmenu">
     <ul>
         <li><a href="">Usuário</a>
             <ul id="submenu">
-                <li><a href="">Criar</a></li>
-                <li><a href="">Listar</a></li>
+                <li><a href="criar.html">Criar</a></li>
+                <li><a href="listar.html">Listar</a></li>
                 <li><a href="">Editar</a></li>
             </ul>
         </li>
