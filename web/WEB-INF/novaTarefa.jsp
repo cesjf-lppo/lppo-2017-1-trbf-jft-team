@@ -22,14 +22,14 @@
             <table border="0">
             <tr align ="left"><td>
         <form method="post">
-                <p>Título <input type="text" name="nome" size="35" value="" /><p>
-                Descrição <input type="text" name="email" size="35" value="" /><p>
-                Data para concluir: <input type="text" name="dataConcluir" value="" size="25" placeholder="Somente números (ddmmaaaa)" /><br><br> 
+                <p>Título: <input type="text" name="titulo" size="35" value="" /><p>
+                Descrição: <input type="text" name="descricao" size="32" value="" /><p>
+                Data para concluir: <input type="date" name="dataConcluir" value="" size="24" /><br><br> 
                 <input type="submit" value="Cadastrar" />
                 <input type="reset" value="Cancelar" />
         </center>
-            </form>
-            </td></tr></table>
+        </td></tr></table>
+          </form>
     </body>
     <footer>
         <%@include file="jspf/footer.jspf" %>
