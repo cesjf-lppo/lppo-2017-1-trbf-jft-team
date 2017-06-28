@@ -1,6 +1,7 @@
 package br.cesjf.lppo.entidades;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,9 @@ public class Tarefa implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataConclusao;
 
+    public Tarefa() {
+    }
+        
     public String getTitulo() {
         return titulo;
     }
@@ -65,4 +69,5 @@ public class Tarefa implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
 }

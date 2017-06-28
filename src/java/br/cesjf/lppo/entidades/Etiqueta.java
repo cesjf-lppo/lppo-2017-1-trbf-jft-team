@@ -20,6 +20,9 @@ public class Etiqueta implements Serializable {
     private Tarefa tarefa;
     private String titulo;
 
+    public Etiqueta() {
+    }
+
     public Long getId() {
         return id;
     }
