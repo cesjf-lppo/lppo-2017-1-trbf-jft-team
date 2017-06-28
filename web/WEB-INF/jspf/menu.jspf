@@ -14,16 +14,16 @@
         </li>
         <li><a href="">Tarefa</a>
             <ul id="submenu">
-                <li><a href="">Criar</a></li>
-                <li><a href="">Listar</a></li>
-                <li><a href="">Editar</a></li>
+                <li><a href="criarTarefa.html">Criar</a></li>
+                <li><a href="listarTarefa.html">Listar</a></li>
+                <li><a href="editarTarefa.html">Editar</a></li>
             </ul>
         </li>
         <li><a href="">Etiqueta</a>
             <ul id="submenu">
-                <li><a href="">Criar</a></li>
-                <li><a href="">Listar</a></li>
-                <li><a href="">Editar</a></li>
+                <li><a href="criarEtiqueta.html">Criar</a></li>
+                <li><a href="listarEtiqueta.html">Listar</a></li>
+                <li><a href="editarEtiqueta.html">Editar</a></li>
             </ul>
         </li>
     </ul>
