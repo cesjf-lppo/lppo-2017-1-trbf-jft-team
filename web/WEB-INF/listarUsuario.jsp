@@ -11,13 +11,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../css/estilo.css" >
+        <link href="../css/estilo.css" rel="stylesheet" type="text/css" >
         <%@include file="jspf/header.jspf" %>
         <%@include file="jspf/menu.jspf" %>
         <title>Lista de usuários</title>
     </head>
     <body>
+	
         <center>
+	    
         <h1>Listar usuários</h1>
         <table border="1">
             <tr>
@@ -31,6 +33,7 @@
                     <td><a href="editarUsuario.html?id=${usuario.id}"> ${usuario.id}</a></td>
                     <td>${usuario.nome}</td>
                     <td>${usuario.email}</td>
+		    <td><a href="excluirUsuario.html?id=${usuario.id}">&#128465;</a></td>
                 </tr>
             </c:forEach>
         </table>

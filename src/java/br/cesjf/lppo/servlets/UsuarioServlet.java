@@ -46,6 +46,7 @@ public class UsuarioServlet extends HttpServlet {
             doListarGet(request, response);
         } else if (request.getServletPath().contains("excluirUsuario.html")){
             doExcluirGet(request, response);
+	    response.sendRedirect("listarUsuario.html");
         } else if (request.getServletPath().contains("editarUsuario.html")){
             doEditarGet(request, response);
         }
@@ -80,12 +81,20 @@ public class UsuarioServlet extends HttpServlet {
 	
     }
 
-    private void doExcluirGet(HttpServletRequest request, HttpServletResponse response) {
+    private void doExcluirGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	
+	try {
+	    UsuarioJpaController dao = new UsuarioJpaController(ut, emf);
+	    Long id = Long.parseLong(request.getParameter("id"));
+	    dao.destroy(id);
+	} catch (Exception ex) {
+	    response.sendRedirect("listarUsuario.html");
+	}
        
     }
 
-    private void doEditarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+    private void doEditarGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
 	try {
 	    UsuarioJpaController dao = new UsuarioJpaController(ut, emf);
 	    Long id = Long.parseLong(request.getParameter("id"));
@@ -99,7 +108,20 @@ public class UsuarioServlet extends HttpServlet {
        
     }
 
-    private void doEditarPost(HttpServletRequest request, HttpServletResponse response) {
+    private void doEditarPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	try {
+	    UsuarioJpaController dao = new UsuarioJpaController(ut, emf);
+	    Long id = Long.parseLong(request.getParameter("id"));
+	    Usuario usuario = dao.findUsuario(id);
+	    usuario.setNome(request.getParameter("nome"));
+	    usuario.setEmail(request.getParameter("email"));
+	    usuario.setSenha(request.getParameter("senha"));
+	    dao.edit(usuario);
+	    
+	    response.sendRedirect("listarUsuario.html");
+	} catch (Exception e){
+	    response.sendRedirect("listarUsuario.html");
+	}
        
     }
 
