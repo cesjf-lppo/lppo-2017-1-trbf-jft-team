@@ -25,6 +25,7 @@
 	    <label> Descrição: <input name="email"  value="${tarefa.descricao}"/>  </label>
 	    <label>Data para concluir: <fmt:formatDate value="${tarefa.dataConcluir}" type="date" dateStyle="default" />  </label>
             <label>Data de conclusão: <fmt:formatDate value="${tarefa.dataConclusao}" type="date" dateStyle="default" /></label>
+            <label><a href="excluirTarefa.html?id=${tarefa.id}">&#128465;</a></label>
         <input type="submit" value="Cadastrar" />
         <input type="reset" value="Cancelar" />	
         </form>

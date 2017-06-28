@@ -3,8 +3,8 @@
     Created on : 27/06/2017, 20:02:41
     Author     : Júnior
 --%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page errorPage="erro.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,8 +32,8 @@
                     <td>${tarefa.id}</td>
                     <td>${tarefa.titulo}</td>
                     <td>${tarefa.descricao}</td>
-                    <td><fmt:formatDate value="${tarefa.dataConcluir}" type="date" dateStyle="default" /></td>
-                    <td><fmt:formatDate value="${tarefa.dataConclusao}" type="date" dateStyle="default" /></td>
+                    <td>${tarefa.dataConcluir}</td>
+                    <td>${tarefa.dataConclusao}</td>
                     <td><a href="excluirTarefa.html?id=${tarefa.id}">&#128465;</a></td>
                 </tr>
             </c:forEach>

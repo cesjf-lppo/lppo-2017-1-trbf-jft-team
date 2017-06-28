@@ -70,11 +70,11 @@ public class TarefaServlet extends HttpServlet {
 
     private void doListarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
             
-            List<Tarefa> tarefas = new ArrayList<>();
+            List<Tarefa> tarefa;
             TarefaJpaController dao = new TarefaJpaController(ut, emf);
-            tarefas = dao.findTarefaEntities();
+            tarefa = dao.findTarefaEntities();
             
-            request.setAttribute("tarefa", tarefas);
+            request.setAttribute("tarefa", tarefa);
             request.getRequestDispatcher("WEB-INF/listarTarefa.jsp").forward(request, response);
             
         }
@@ -141,7 +141,5 @@ public class TarefaServlet extends HttpServlet {
          } catch (Exception ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
     }
-    
 }
