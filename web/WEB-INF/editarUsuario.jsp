@@ -12,23 +12,19 @@
 	 <link href="../css/estilo.css" rel="stylesheet" type="text/css" >
         <%@include file="jspf/header.jspf" %>
         <%@include file="jspf/menu.jspf" %>
-        <title>Editar Usuario</title>
+        <title>Editar usuário</title>
     </head>
     <body>
-	
-           <h1>Editar Usuario</h1>
+	<center>
+           <h1>Editar usuário</h1>
 	<form method="post">
-	    <label> id: <input name="id" type="hidden" value="${usuario.id}"/> ${usuario.id} </label>
-	    <label> Nome: <input name="nome" value="${usuario.nome}"/>  </label>
-	    <label> Email: <input name="email"  value="${usuario.email}"/>  </label>
-	    <label> Senha <input name="senha"  value="${usuario.senha}"/>  </label>
-	    
-		
-	<input type="submit" value="Cadastrar" />
+	    <label> ID: <input name="id" type="hidden" value="${usuario.id}"/> ${usuario.id} </label><p>
+	    <label> Nome: <input name="nome" value="${usuario.nome}"/></label><p>
+	    <label> Email: <input name="email"  value="${usuario.email}"/></label><p>
+	    <label> Senha <input name="senha"  value="${usuario.senha}"/></label><p>
+        <input type="submit" value="Cadastrar" />
         <input type="reset" value="Cancelar" />	
-	    
 	</form>
-	    
-	
+        </center> 
     </body>
 </html>

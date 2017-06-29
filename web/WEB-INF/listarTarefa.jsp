@@ -19,7 +19,7 @@
     <body>
         <center>
         <h1>Listar tarefas</h1>
-        <table border="1">
+        <table border="1" align="center">
             <tr>
                 <th>ID: </th>
                 <th>Título: </th>
@@ -29,7 +29,7 @@
             </tr>
             <c:forEach var="tarefa" items="${tarefa}">
                 <tr>
-                    <td>${tarefa.id}</td>
+                    <td><a href="editarTarefa.html?id=${tarefa.id}">${tarefa.id}</a></td>
                     <td>${tarefa.titulo}</td>
                     <td>${tarefa.descricao}</td>
                     <td>${tarefa.dataConcluir}</td>

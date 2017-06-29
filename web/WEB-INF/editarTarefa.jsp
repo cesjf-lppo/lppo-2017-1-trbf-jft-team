@@ -18,17 +18,18 @@
         <title>Editar Tarefa</title>
     </head>
     <body>
-        <h1>Editar Tarefa</h1>
+        <center>
+        <h1>Editar Tarefa</h1><br><br>
 	<form method="post">
-	    <label> id: <input name="id" type="hidden" value="${tarefa.id}"/> ${tarefa.id} </label>
-	    <label> Título: <input name="nome" value="${tarefa.titulo}"/>  </label>
-	    <label> Descrição: <input name="email"  value="${tarefa.descricao}"/>  </label>
-	    <label>Data para concluir: <fmt:formatDate value="${tarefa.dataConcluir}" type="date" dateStyle="default" />  </label>
-            <label>Data de conclusão: <fmt:formatDate value="${tarefa.dataConclusao}" type="date" dateStyle="default" /></label>
-            <label><a href="excluirTarefa.html?id=${tarefa.id}">&#128465;</a></label>
+	    <label> ID: <input name="id" type="hidden" value="${tarefa.id}"/> ${tarefa.id} </label><p>
+	    <label> Título: <input name="nome" value="${tarefa.titulo}"/>  </label><p>
+	    <label> Descrição: <input name="email"  value="${tarefa.descricao}"/>  </label><p>
+	    <label>Data para concluir: <input name="dataConcluir" value="${tarefa.dataConcluir}" type="date" dateStyle="default" />  </label><p>
+            <label>Data de conclusão: <input name="dataConclusao" value="${tarefa.dataConclusao}" type="date" dateStyle="default" /></label><p>
         <input type="submit" value="Cadastrar" />
         <input type="reset" value="Cancelar" />	
         </form>
+        </center>
     </body>
     <footer>
         <%@include file="jspf/footer.jspf" %>
