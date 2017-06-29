@@ -51,18 +51,18 @@ public class TarefaServlet extends HttpServlet {
 
         @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        if (request.getServletPath().contains("/editarTarefa.html")) {
-            doEditarPost(request, response);
-        }
+            throws ServletException, IOException {        
         if (request.getServletPath().contains("/criarTarefa.html")) {
             try {
-                doCriarPost(request, response);
+                doCriarPost(request,response);
             } catch (ParseException ex) {
                 Logger.getLogger(TarefaServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } else if (request.getServletPath().contains("/editarTarefa.html")) {
+            doEditarPost(request,response);
+        } 
     }
+
 
     private void doCriarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         request.getRequestDispatcher("WEB-INF/novaTarefa.jsp").forward(request, response);
@@ -85,7 +85,8 @@ public class TarefaServlet extends HttpServlet {
             Long id = Long.parseLong(request.getParameter("id"));
             dao.destroy(id);
         } catch (Exception e) {
-        }
+            response.sendRedirect("WEB-INF/erro.jsp");
+        }   response.sendRedirect("listarTarefa.html");
     }
 
     private void doEditarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -96,42 +97,52 @@ public class TarefaServlet extends HttpServlet {
             Tarefa tarefa = dao.findTarefa(id);
             request.setAttribute("tarefa", tarefa);
             request.getRequestDispatcher("WEB-INF/editarTarefa.jsp").forward(request, response);
-        } catch (IOException | NumberFormatException | ServletException e) {
+        } catch (Exception e) {
             response.sendRedirect("listarTarefa.html");
         }
     }
 
-    private void doEditarPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void doEditarPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             TarefaJpaController dao = new TarefaJpaController(ut, emf);
 
             Long id = Long.parseLong(request.getParameter("id"));
             Tarefa tarefa = dao.findTarefa(id);
-            SimpleDateFormat d = new SimpleDateFormat("dd//MM/yyyy");
-            Date data = d.parse(request.getParameter("dataConcluir"));
-
+            
             tarefa.setTitulo(request.getParameter("titulo"));
             tarefa.setDescricao(request.getParameter("descricao"));
-            tarefa.setDataConcluir(data);
-
-            dao.edit(tarefa);
-
-            response.sendRedirect("listarTarefa.html");
-        } catch (Exception e) {
-            response.sendRedirect("listarTarefa.html");
+            
+            SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            tarefa.setDataConcluir(data.parse(request.getParameter("dataConcluir")));
+        } catch (ParseException ex) {
+            Logger.getLogger(TarefaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            tarefa.setDataConclusao(data.parse(request.getParameter("dataConclusao")));
+        } catch (ParseException ex) {
+            Logger.getLogger(TarefaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        dao.edit(tarefa);
+        response.sendRedirect("listaTarefa.html");       
+    } catch (Exception e) {
+        response.sendRedirect("WEB-INF/erro.jsp");
+    }
     }
 
     private void doCriarPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
         
-        SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = d.parse(request.getParameter("dataConcluir"));
-
         Tarefa tarefa = new Tarefa();
         tarefa.setTitulo(request.getParameter("titulo"));
         tarefa.setDescricao(request.getParameter("descricao"));
-        tarefa.setDataConcluir(data);
+        
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            tarefa.setDataConcluir(data.parse(request.getParameter("dataConcluir")));
+        } catch (ParseException ex) {
+            Logger.getLogger(TarefaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         TarefaJpaController dao = new TarefaJpaController(ut, emf);
         
