@@ -3,6 +3,7 @@ package br.cesjf.lppo.servlets;
 import br.cesjf.lppo.dao.EtiquetaJpaController;
 import br.cesjf.lppo.dao.TarefaJpaController;
 import br.cesjf.lppo.dao.UsuarioJpaController;
+import br.cesjf.lppo.dao.exceptions.RollbackFailureException;
 import br.cesjf.lppo.entidades.Etiqueta;
 import br.cesjf.lppo.entidades.Tarefa;
 import br.cesjf.lppo.entidades.Usuario;
@@ -27,7 +28,7 @@ import javax.transaction.UserTransaction;
  *
  * @author Júnior
  */
-@WebServlet(name = "EtiquetaServlet", urlPatterns = {"/criarEtiqueta.html", "/listarEtiqueta.html", "/excluirEtiqueta.html", "/editarEtiqueta.html", "/listarEtiquetaPorAutor.html", "/listarEtiquetaPorAutorETitulo.html"})
+@WebServlet(name = "EtiquetaServlet", urlPatterns = {"/criarEtiqueta.html", "/listarEtiqueta.html", "/excluirEtiqueta.html", "/editarEtiqueta.html"})
 public class EtiquetaServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "lppo-2017-1-trbf-jft-teamPU")
@@ -49,12 +50,7 @@ public class EtiquetaServlet extends HttpServlet {
 	    doListarGet(request, response);
 	} else if (request.getServletPath().contains("/criarEtiqueta.html")) {
 	    doCriarGet(request, response);
-	} else if (request.getServletPath().contains("/listarEtiquetaPorAutor.html")) {
-	    doListarEtiquetaPorAutorGet(request, response);
-	} else if (request.getServletPath().contains("/listarEtiquetaPorAutorETitulo.html")) {
-	    doListarEtiquetaPorAutorETituloGet(request, response);
-	}
-
+	} 
     }
 
     @Override
@@ -66,12 +62,7 @@ public class EtiquetaServlet extends HttpServlet {
 	if (request.getServletPath().contains("/criarEtiqueta.html")) {
 	    doCriarPost(request, response);
 	}
-	if (request.getServletPath().contains("/listarEtiquetaPorAutor.html")) {
-	    doListarEtiquetaPorAutorPost(request, response);
-	}
-	if (request.getServletPath().contains("/listarEtiquetaPorAutoreTitulo.html")) {
-	    doListarEtiquetaPorAutorETituloPost(request, response);
-	}
+	
     }
 
     private void doListarGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -145,111 +136,48 @@ public class EtiquetaServlet extends HttpServlet {
 
     }
 
-    private void doEditarGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	try {
-	    EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
-	    Long id = Long.parseLong(request.getParameter("id"));
-	    Etiqueta etiqueta = dao.findEtiqueta(id);
-	    request.setAttribute("etiqueta", etiqueta);
-	    request.getRequestDispatcher("WEB-INF/editarEtiqueta.jsp").forward(request, response);
-	} catch (Exception e) {
-	    response.sendRedirect("listarEtiqueta.html");
-
-	}
+    private void doEditarGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	
+	Long id = Long.parseLong(request.getParameter("id"));
+        Etiqueta etiqueta;
+        
+        EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
+        etiqueta = dao.findEtiqueta(id);
+        
+        request.setAttribute("etiqueta",etiqueta);
+        request.getRequestDispatcher("WEB-INF/editarEtiqueta.jsp").forward(request, response);
 
     }
 
     private void doEditarPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	try {
-	    EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
-	    Long id = Long.parseLong(request.getParameter("id"));
-	    Etiqueta etiqueta = dao.findEtiqueta(id);
-	    UsuarioJpaController u = new UsuarioJpaController(ut, emf);
-	    TarefaJpaController t = new TarefaJpaController(ut, emf);
-
-	    etiqueta.setUsuario((u.findUsuario(Long.parseLong(request.getParameter("usuario_id")))));
-	    etiqueta.setTarefa((t.findTarefa(Long.parseLong(request.getParameter("tarefa_id")))));
-	    etiqueta.setTitulo(request.getParameter("titulo"));
-
-	    dao.edit(etiqueta);
-
-	    response.sendRedirect("listarEtiqueta.html");
-
-	} catch (Exception e) {
-	    response.sendRedirect("listarEtiqueta.html");
-	}
-
+	 try {
+            EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
+            
+            Long id = Long.parseLong(request.getParameter("id"));
+            Etiqueta etiqueta = dao.findEtiqueta(id);
+            etiqueta.setTitulo(request.getParameter("titulo"));
+            dao.edit(etiqueta);   
+            response.sendRedirect("listarEtiqueta.html");
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(EtiquetaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(EtiquetaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }	
+	
     }
 
     private void doExcluirGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	try {
-	    EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
-	    Long id = Long.parseLong(request.getParameter("id"));
-
-	    dao.destroy(id);
-	} catch (Exception ex) {
-	    response.sendRedirect("listarEtiqueta.html");
-	}
-    }
-
-    private void doListarEtiquetaPorAutorGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	List<Etiqueta> etiqueta = new ArrayList<>();
-	EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
-	etiqueta = dao.findEtiquetaEntities();
-	request.setAttribute("etiqueta", etiqueta);
-
-	List<Usuario> usuario = new ArrayList<>();
-	UsuarioJpaController dao2 = new UsuarioJpaController(ut, emf);
-	usuario = dao2.findUsuarioEntities();
-	request.setAttribute("usuario", usuario);
-
-	request.getRequestDispatcher("WEB-INF/listarEtiquetaPorAutor.jsp").forward(request, response);
-    }
-
-    private void doListarEtiquetaPorAutorPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	Long id = Long.parseLong(request.getParameter("usuario"));
-
-	List<Etiqueta> etiqueta = new ArrayList<>();
-	EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
-	etiqueta = dao.getEtiquetaByAutor(id);
-	request.setAttribute("etiqueta", etiqueta);
-
-	List<Usuario> usuario = new ArrayList<>();
-	UsuarioJpaController daoUser = new UsuarioJpaController(ut, emf);
-	usuario = daoUser.findUsuarioEntities();
-	request.setAttribute("usuario", usuario);
-
-	List<Etiqueta> etiquetas = new ArrayList<>();
-	etiquetas = dao.findEtiquetaEntities();
-	request.setAttribute("etiquetas", etiquetas);
-
-	request.getRequestDispatcher("WEB-INF/listarEtiquetaPorAutor.jsp").forward(request, response);
-    }
-
-    private void doListarEtiquetaPorAutorETituloGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	List<Etiqueta> etiqueta = new ArrayList<>();
-	EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
-	etiqueta = dao.findEtiquetaEntities();
-	request.setAttribute("etiqueta", etiqueta);
-
-	request.getRequestDispatcher("WEB-INF/listarEtiquetaPorAutorETitulo.jsp").forward(request, response);
-    }
-
-    private void doListarEtiquetaPorAutorETituloPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	String titulo = request.getParameter("titulo");
-
-	List<Etiqueta> etiqueta = new ArrayList<>();
-	EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
-	etiqueta = dao.getEtiquetaByTitulo(titulo);
-	request.setAttribute("etiqueta", etiqueta);
-
-	List<Etiqueta> etiquetas = new ArrayList<>();
-	etiquetas = dao.findEtiquetaEntities();
-	request.setAttribute("etiquetas", etiquetas);
-
-	request.getRequestDispatcher("WEB-INF/listarEtiquetaPorAutorETitulo.jsp").forward(request, response);
+	
+	   try {
+            EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);        
+            Long id = Long.parseLong(request.getParameter("id"));
+            dao.destroy(id);
+        } catch (Exception ex) {
+            response.sendRedirect("WEB-INF/erro.jsp");
+        }
+        response.sendRedirect("listarEtiqueta.html");
+	
+	
     }
 
 }
