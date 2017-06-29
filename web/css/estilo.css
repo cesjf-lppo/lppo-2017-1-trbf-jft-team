@@ -8,7 +8,7 @@
 
 #menu {
     width: 280px;
-    height: 160px;
+    height: 5px;
     margin: auto;
 }
 
@@ -18,6 +18,12 @@
     clear: both;
     text-align: center;
     padding: 30px;
+}
+
+#conteudo{
+    font: 120% arial, hevetica, sans-serif;
+    padding: 70px;
+    min-width: 90%;
 }
 
 .dropdownmenu ul, .dropdownmenu li {
