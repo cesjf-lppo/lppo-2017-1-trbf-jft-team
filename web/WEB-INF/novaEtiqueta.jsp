@@ -16,6 +16,7 @@
         <title>Cadastrar etiqueta</title>
     </head>
     <body>
+        <div id="conteudo">
         <center>
         <h1>Cadastrar etiqueta</h1>
         <p>
@@ -40,6 +41,7 @@
         </center>
             </form>
         </td></tr></table>
+        </div>
     </body>
     <footer>
         <%@include file="jspf/footer.jspf" %>

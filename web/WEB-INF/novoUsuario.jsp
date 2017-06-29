@@ -10,13 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../css/estilo.css" rel="stylesheet" type="text/css" >
-	
-        <%@include file="jspf/header.jspf" %>
-        <%@include file="jspf/menu.jspf" %>
+        <link rel="stylesheet" href="css/estilo.css" type="text/css" media="screen"> 
+	<div id="header"><%@include file="jspf/header.jspf" %></div>
+        <div id="menu"><%@include file="jspf/menu.jspf" %></div>
         <title>Cadastrar usuário</title>
     </head>
     <body>
+        <div id="conteudo">
         <center>
         <h1>Cadastrar usuário</h1>
         <p>
@@ -26,12 +26,13 @@
                 <p>Nome: <input type="text" name="nome" size="35" value="" /><p>
                 E-mail: <input type="text" name="email" size="35" value="" /><p>
                 Senha: <input type="password" name="senha" size="35" value="" /><br><br>
-                
+                </td></tr></table>
                 <input type="submit" value="Cadastrar" />
                 <input type="reset" value="Cancelar" />
         </center>
             </form>
-            </td></tr></table>
+            
+        </div>
     </body>
     <footer>
         <%@include file="jspf/footer.jspf" %>

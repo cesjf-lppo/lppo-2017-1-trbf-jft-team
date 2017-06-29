@@ -11,15 +11,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../css/estilo.css" rel="stylesheet" type="text/css" >
+        <link rel="stylesheet" href="css/estilo.css" type="text/css" media="screen"> 
         <%@include file="jspf/header.jspf" %>
         <%@include file="jspf/menu.jspf" %>
         <title>Lista de usuários</title>
     </head>
     <body>
-	
+	<div id="conteudo">
         <center>
-	    
         <h1>Listar usuários</h1>
         <table border="1">
             <tr>
@@ -38,8 +37,8 @@
             </c:forEach>
         </table>
         <br>
-        
         </center>
+        </div>
     </body>
     <footer>
         <%@include file="jspf/footer.jspf" %>

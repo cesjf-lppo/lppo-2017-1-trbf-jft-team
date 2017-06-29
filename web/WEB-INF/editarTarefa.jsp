@@ -12,14 +12,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../css/estilo.css" rel="stylesheet" type="text/css" >
+        <link rel="stylesheet" href="css/estilo.css" type="text/css" media="screen"> 
         <%@include file="jspf/header.jspf" %>
         <%@include file="jspf/menu.jspf" %>
         <title>Editar Tarefa</title>
     </head>
     <body>
+        <div id="conteudo">
         <center>
-        <h1>Editar Tarefa</h1><br><br>
+        <h1>Editar Tarefa</h1><br>
 	<form method="post">
 	    <label> ID: <input name="id" type="hidden" value="${tarefa.id}"/> ${tarefa.id} </label><p>
 	    <label> Título: <input name="nome" value="${tarefa.titulo}"/>  </label><p>
@@ -30,6 +31,7 @@
         <input type="reset" value="Cancelar" />	
         </form>
         </center>
+        </div>
     </body>
     <footer>
         <%@include file="jspf/footer.jspf" %>
