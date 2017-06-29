@@ -9,13 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/estilo.css" rel="stylesheet" type="text/css" />
-        <%@include file="WEB-INF/jspf/header.jspf" %>
-        <%@include file="WEB-INF/jspf/menu.jspf" %>
+        <link rel="stylesheet" href="css/estilo.css" type="text/css" media="screen"> 
+        <div id="header"><%@include file="WEB-INF/jspf/header.jspf" %></div>
+        <div id="menu"><%@include file="WEB-INF/jspf/menu.jspf" %></div>
         <title>Início</title>
     </head>
     <body>
-        <table border="1" width="350" cellpadding="7" cellspacing="1" align="center">
+        <div id="conteudo">
+        <table text border="1" width="400" cellpadding="7" cellspacing="1" align="center">
             <thead>
                 <tr>
                     <th>Aluno</th>
@@ -29,13 +30,14 @@
                 </tr>
                 <tr>
                     <td>Tiago Souza Nogueira</td>
-                    <td>00000000</td>
+                    <td>02528428</td>
                 </tr>
             </tbody>
         </table>
         <p>
+            </div>
     </body>
     <footer>
-        <%@include file="WEB-INF/jspf/footer.jspf" %>
+        <div id="footer"><%@include file="WEB-INF/jspf/footer.jspf" %></div>
     </footer>
 </html>
