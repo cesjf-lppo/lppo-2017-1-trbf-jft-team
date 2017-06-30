@@ -28,7 +28,7 @@ import javax.transaction.UserTransaction;
  *
  * @author Tiago Nogueira
  */
-@WebServlet(name = "EtiquetaServlet", urlPatterns = {"/criarEtiqueta.html", "/listarEtiqueta.html", "/excluirEtiqueta.html", "/editarEtiqueta.html", "/etiquetaPorAutor.html"})
+@WebServlet(name = "EtiquetaServlet", urlPatterns = {"/criarEtiqueta.html", "/listarEtiqueta.html", "/excluirEtiqueta.html", "/editarEtiqueta.html", "/etiquetaPorAutor.html", "/etiquetaPorTitulo.html"})
 public class EtiquetaServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "lppo-2017-1-trbf-jft-teamPU")
@@ -52,6 +52,9 @@ public class EtiquetaServlet extends HttpServlet {
 	    doCriarGet(request, response);
 	}   else if (request.getServletPath().contains("/etiquetaPorAutor.html")) {
 	    doEtiquetaPorAutorGet(request, response);
+	
+	}   else if (request.getServletPath().contains("/etiquetaPorTitulo.html")) {
+	    doEtiquetaPorTituloGet(request, response);
 	}
     }
 
@@ -183,6 +186,24 @@ public class EtiquetaServlet extends HttpServlet {
 	
 	request.setAttribute("etiqueta", etiqueta);
         request.getRequestDispatcher("WEB-INF/listarEtiquetaPorAutor.jsp").forward(request, response);
+	
+    }
+
+    private void doEtiquetaPorTituloGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	List<Etiqueta> etiqueta = new ArrayList<>();
+	
+	String titulo = request.getParameter("titulo");
+	
+	EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
+	
+	
+	etiqueta = dao.getEtiquetaByTitulo(titulo);
+	
+	
+	request.setAttribute("etiqueta", etiqueta);
+        request.getRequestDispatcher("WEB-INF/listarEtiquetaPorTitulo.jsp").forward(request, response);
+	
 	
     }
     
