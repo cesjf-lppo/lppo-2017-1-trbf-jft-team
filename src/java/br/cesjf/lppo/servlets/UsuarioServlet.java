@@ -46,7 +46,7 @@ public class UsuarioServlet extends HttpServlet {
             doListarGet(request, response);
         } else if (request.getServletPath().contains("excluirUsuario.html")){
             doExcluirGet(request, response);
-	    response.sendRedirect("listarUsuario.html");
+	    //response.sendRedirect("listarUsuario.html");
         } else if (request.getServletPath().contains("editarUsuario.html")){
             doEditarGet(request, response);
         }
@@ -88,8 +88,8 @@ public class UsuarioServlet extends HttpServlet {
 	    Long id = Long.parseLong(request.getParameter("id"));
 	    dao.destroy(id);
 	} catch (Exception ex) {
-	    response.sendRedirect("listarUsuario.html");
 	}
+	    response.sendRedirect("listarUsuario.html");
        
     }
 
