@@ -12,12 +12,12 @@
         <link rel="stylesheet" href="css/estilo.css" type="text/css" media="screen"> 
         <%@include file="jspf/header.jspf" %>
         <%@include file="jspf/menu.jspf" %>
-        <title>Listar etiqueta por autor</title>
+        <title>Listar etiqueta por Titulo</title>
     </head>
     <body>
 	<div id="conteudo">
 	    <center>
-	<h1>Listar Etiqueta Por Autor</h1>
+	<h1>Listar Etiqueta Por Titulo</h1>
                 <table border="1" align="center">
                     <tr>
                         <th>Id</th>
