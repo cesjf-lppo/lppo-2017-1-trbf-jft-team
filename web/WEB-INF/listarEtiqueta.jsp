@@ -38,6 +38,8 @@
                 </table>
 	    </center>
 	</div>
-        
     </body>
+<footer>
+    <%@include file="jspf/footer.jspf" %>
+</footer>
 </html>
