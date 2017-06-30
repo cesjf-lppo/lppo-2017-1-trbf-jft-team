@@ -4,10 +4,11 @@
     clear: both;
     text-align: center;
     padding: 10px;
+    margin: auto;
 }
 
 #menu {
-    width: 280px;
+    width: 480px;
     height: 5px;
     margin: auto;
 }
@@ -18,12 +19,14 @@
     clear: both;
     text-align: center;
     padding: 30px;
+    margin: auto;
 }
 
 #conteudo{
     font: 120% arial, hevetica, sans-serif;
     padding: 70px;
     min-width: 90%;
+    margin: auto;
 }
 
 .dropdownmenu ul, .dropdownmenu li {

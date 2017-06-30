@@ -26,5 +26,10 @@
                 <li><a href="editarEtiqueta.html">Editar</a></li>
             </ul>
         </li>
+        <li><a href="">Quadro kanban</a>
+            <ul id="submenu">
+                <li><a href="quadroKanban.html">Criar quadro</a></li>
+            </ul>
+        </li>
     </ul>
 </div>

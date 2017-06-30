@@ -41,7 +41,7 @@ public class EtiquetaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
-	if (request.getServletPath().contains("/editarEtiqueta.html")) {
+        if (request.getServletPath().contains("/editarEtiqueta.html")) {
 	    doEditarGet(request, response);
 	} else if (request.getServletPath().contains("/excluirEtiqueta.html")) {
 	    doExcluirGet(request, response);
@@ -50,10 +50,10 @@ public class EtiquetaServlet extends HttpServlet {
 	    doListarGet(request, response);
 	} else if (request.getServletPath().contains("/criarEtiqueta.html")) {
 	    doCriarGet(request, response);
-	}   else if (request.getServletPath().contains("/etiquetaPorAutor.html")) {
+	} else if (request.getServletPath().contains("/etiquetaPorAutor.html")) {
 	    doEtiquetaPorAutorGet(request, response);
 	
-	}   else if (request.getServletPath().contains("/etiquetaPorTitulo.html")) {
+	} else if (request.getServletPath().contains("/etiquetaPorTitulo.html")) {
 	    doEtiquetaPorTituloGet(request, response);
 	}
     }
@@ -168,8 +168,7 @@ public class EtiquetaServlet extends HttpServlet {
         EtiquetaJpaController dao = new EtiquetaJpaController(ut, emf);
        
             etiqueta = dao.findEtiquetaEntities();
-        
-        
+                
         request.setAttribute("etiqueta", etiqueta);
         request.getRequestDispatcher("WEB-INF/listarEtiqueta.jsp").forward(request, response);
     }
